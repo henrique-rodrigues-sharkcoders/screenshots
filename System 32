@@ -1,0 +1,38 @@
+from tkinter import *
+import pyautogui
+import tkinter as tk
+
+root = tk.Tk()
+root.title("PS")
+root.geometry("300x250+100+100")
+root.resizable(width=False, height=False)
+
+Label_1 = tk.Label(root, text="Python Screenshoter", font="Comic 12")
+Label_1.place(x=75, y=50)
+
+Label_2 = Entry(root, font="Arial 16")
+Label_2.place(x=75, y=50)
+
+def captura():
+    file_name = input("File name:")
+
+    try:
+        screenshot = pyautogui.screenshot()
+
+        save_path = f"{file_name}.png"
+        screenshot.save(save_path)
+        print(f"Screenshot was saved succesfully at {save_path}")
+
+    except pyautogui.PyAutoGUIException as e:
+        print(f"PyautoGUI encountered an error: {e}")
+
+    except OSError as e:
+        print(f"Error saving screenshot {e}")
+
+    except Exception as e:
+        print(f"An unexpected error occurred")
+
+Print= tk.Button(root, text="Capturar", width=25, height=5, command=captura)
+Print.place(x=55, y=120)
+
+root.mainloop()
